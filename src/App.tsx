@@ -1,21 +1,29 @@
-import React, { useState } from "react";
-import { Button } from "@blueprintjs/core";
+import React, { FunctionComponent } from "react";
+import { Router, RouteComponentProps } from "@reach/router";
+
+import FullPage from "./layouts/FullPage";
+
+import Home from "./pages/Home";
+import Login from "./pages/Login";
+
+const fullPageLayout = (
+  Component: React.ComponentType
+): FunctionComponent<RouteComponentProps> => props => {
+  return (
+    <FullPage>
+      <Component {...props} />
+    </FullPage>
+  );
+};
+
+const LoginPage = fullPageLayout(Login);
 
 function App() {
-  let [someNumber, setSomeNumber] = useState(0);
-
-  const incrementCounter = () => {
-    setSomeNumber(someNumber + 1);
-  };
-
   return (
-    <div style={{ margin: 5 }}>
-      <div>{someNumber}</div>
-
-      <div>
-        <Button intent="success" text="increase" onClick={incrementCounter} />
-      </div>
-    </div>
+    <Router>
+      <Home path="/" />
+      <LoginPage path="login" />
+    </Router>
   );
 }
 
