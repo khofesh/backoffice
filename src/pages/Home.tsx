@@ -4,9 +4,6 @@ import { RouteComponentProps, Link } from "@reach/router";
 const Home: FunctionComponent<RouteComponentProps> = () => {
   return (
     <div style={{ margin: 10 }}>
-      <nav>
-        <Link to="login">Login</Link>
-      </nav>
       <p>home</p>
     </div>
   );
