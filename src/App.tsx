@@ -6,7 +6,6 @@ import MainPage from "./layouts/MainPage";
 
 import Home from "./pages/Home";
 import Login from "./pages/Login";
-import Signup from "./pages/Signup";
 
 const fullPageLayout = (
   Component: React.ComponentType
@@ -31,14 +30,12 @@ const mainPageLayout = (
 const HomePage = mainPageLayout(Home);
 
 const LoginPage = fullPageLayout(Login);
-const SignupPage = fullPageLayout(Signup);
 
 function App() {
   return (
     <Router>
       <HomePage path="/" />
       <LoginPage path="login" />
-      <SignupPage path="signup" />
     </Router>
   );
 }
