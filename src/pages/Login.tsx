@@ -14,6 +14,12 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 
+import { Dispatch, AnyAction } from "redux";
+import { connect } from "react-redux";
+import { loginAction } from "../actions";
+import { LoginInterface } from "../actions/interfaces";
+import { StoreState } from "../reducers";
+
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
@@ -47,7 +53,12 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const Login: FunctionComponent<RouteComponentProps> = () => {
+interface ReduxReach extends RouteComponentProps {
+  login: LoginInterface;
+  loginAction(): any;
+}
+
+const _Login: FunctionComponent<ReduxReach> = props => {
   const classes = useStyles();
 
   return (
@@ -110,11 +121,36 @@ const Login: FunctionComponent<RouteComponentProps> = () => {
           </Grid>
         </form>
       </div>
+      <Button
+        type="submit"
+        fullWidth
+        variant="contained"
+        color="primary"
+        className={classes.submit}
+        onClick={props.loginAction}
+      >
+        Sign In
+      </Button>
       <Box mt={8}>
         <Copyright />
       </Box>
     </Container>
   );
 };
+
+const mapStateToProps = (state: StoreState) => {
+  return { login: state.login };
+};
+
+const Login = connect<
+  {
+    login: LoginInterface;
+  },
+  {
+    loginAction: () => (dispatch: Dispatch<AnyAction>) => Promise<void>;
+  },
+  RouteComponentProps,
+  StoreState
+>(mapStateToProps, { loginAction })(_Login);
 
 export default Login;
