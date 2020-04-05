@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from "react";
-import { RouteComponentProps, Link } from "@reach/router";
+import { RouteComponentProps } from "@reach/router";
 
 const Home: FunctionComponent<RouteComponentProps> = () => {
   return (
