@@ -13,6 +13,12 @@ export const loginAction = () => {
       }
     );
 
+    if (response.data.token) {
+      dispatch({
+        type: ActionTypes.authenticated,
+        payload: true
+      });
+    }
     dispatch({
       type: ActionTypes.login,
       payload: response.data
