@@ -4,13 +4,18 @@ import { ActionTypes } from "./types";
 import { LoginInterface } from "./interfaces";
 import { navigate } from "@reach/router";
 
-export const loginAction = () => {
+/**
+ *
+ * @param email string eve.holt@reqres.in
+ * @param password string cityslicka
+ */
+export const loginAction = (email: string, password: string) => {
   return async (dispatch: Dispatch) => {
     const response = await axios.post<LoginInterface>(
       "https://reqres.in/api/login",
       {
-        email: "eve.holt@reqres.in",
-        password: "cityslicka"
+        email,
+        password
       }
     );
 
