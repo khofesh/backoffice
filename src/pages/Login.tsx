@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from "react";
+import React, { FunctionComponent, useState } from "react";
 import { RouteComponentProps } from "@reach/router";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
@@ -55,11 +55,18 @@ const useStyles = makeStyles(theme => ({
 
 interface ReduxReach extends RouteComponentProps {
   login: LoginInterface;
-  loginAction(): any;
+  loginAction(email: string, password: string): any;
 }
 
 const _Login: FunctionComponent<ReduxReach> = props => {
   const classes = useStyles();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleLogin = async (event: React.FormEvent) => {
+    event.preventDefault();
+    await props.loginAction(email, password);
+  };
 
   return (
     <Container component="main" maxWidth="xs">
@@ -71,7 +78,7 @@ const _Login: FunctionComponent<ReduxReach> = props => {
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
-        <form className={classes.form} noValidate>
+        <form className={classes.form} noValidate onSubmit={handleLogin}>
           <TextField
             variant="outlined"
             margin="normal"
@@ -82,6 +89,9 @@ const _Login: FunctionComponent<ReduxReach> = props => {
             name="email"
             autoComplete="email"
             autoFocus
+            onChange={e => {
+              setEmail(e.target.value);
+            }}
           />
           <TextField
             variant="outlined"
@@ -93,6 +103,9 @@ const _Login: FunctionComponent<ReduxReach> = props => {
             type="password"
             id="password"
             autoComplete="current-password"
+            onChange={e => {
+              setPassword(e.target.value);
+            }}
           />
           <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}
@@ -121,16 +134,6 @@ const _Login: FunctionComponent<ReduxReach> = props => {
           </Grid>
         </form>
       </div>
-      <Button
-        type="submit"
-        fullWidth
-        variant="contained"
-        color="primary"
-        className={classes.submit}
-        onClick={props.loginAction}
-      >
-        Sign In
-      </Button>
       <Box mt={8}>
         <Copyright />
       </Box>
@@ -147,7 +150,10 @@ const Login = connect<
     login: LoginInterface;
   },
   {
-    loginAction: () => (dispatch: Dispatch<AnyAction>) => Promise<void>;
+    loginAction: (
+      email: string,
+      password: string
+    ) => (dispatch: Dispatch<AnyAction>) => Promise<void>;
   },
   RouteComponentProps,
   StoreState
