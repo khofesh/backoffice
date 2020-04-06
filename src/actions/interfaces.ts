@@ -12,3 +12,12 @@ export interface LoginAction {
   type: ActionTypes.login;
   payload: LoginInterface;
 }
+
+export interface AuthenticatedInterface {
+  authenticated: boolean;
+}
+
+export interface AuthenticatedAction {
+  type: ActionTypes.authenticated;
+  payload: AuthenticatedInterface;
+}
