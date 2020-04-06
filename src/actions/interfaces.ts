@@ -14,7 +14,7 @@ export interface LoginAction {
 }
 
 export interface AuthenticatedInterface {
-  authenticated: boolean;
+  status: boolean;
 }
 
 export interface AuthenticatedAction {

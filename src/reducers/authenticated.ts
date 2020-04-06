@@ -5,7 +5,7 @@ import {
 import { ActionTypes } from "../actions/types";
 
 export const AuthenticatedReducer = (
-  state: AuthenticatedInterface = { authenticated: false },
+  state: AuthenticatedInterface = { status: false },
   action: AuthenticatedAction
 ) => {
   switch (action.type) {

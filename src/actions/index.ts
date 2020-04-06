@@ -17,7 +17,7 @@ export const loginAction = () => {
     if (response.data.token) {
       dispatch({
         type: ActionTypes.authenticated,
-        payload: true
+        payload: { status: true }
       });
       navigate("/");
     }
