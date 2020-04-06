@@ -10,7 +10,7 @@ interface MainPageProps {
 
 const _MainPage: FunctionComponent<MainPageProps> = props => {
   console.log(props.authenticated);
-  if (!props.authenticated) return <Redirect to="login" noThrow />;
+  if (!props.authenticated.status) return <Redirect to="login" noThrow />;
 
   return (
     <div>
