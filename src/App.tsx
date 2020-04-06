@@ -6,6 +6,7 @@ import MainPage from "./layouts/MainPage";
 
 import Home from "./pages/Home";
 import Login from "./pages/Login";
+import NotFound from "./pages/NotFound";
 
 const fullPageLayout = (
   Component: React.ComponentType
@@ -30,12 +31,14 @@ const mainPageLayout = (
 const HomePage = mainPageLayout(Home);
 
 const LoginPage = fullPageLayout(Login);
+const NotFoundPage = fullPageLayout(NotFound);
 
 function App() {
   return (
     <Router>
       <HomePage path="/" />
       <LoginPage path="login" />
+      <NotFoundPage default />
     </Router>
   );
 }
