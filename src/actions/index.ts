@@ -2,6 +2,7 @@ import axios from "axios";
 import { Dispatch } from "redux";
 import { ActionTypes } from "./types";
 import { LoginInterface } from "./interfaces";
+import { navigate } from "@reach/router";
 
 export const loginAction = () => {
   return async (dispatch: Dispatch) => {
@@ -18,6 +19,7 @@ export const loginAction = () => {
         type: ActionTypes.authenticated,
         payload: true
       });
+      navigate("/");
     }
     dispatch({
       type: ActionTypes.login,
