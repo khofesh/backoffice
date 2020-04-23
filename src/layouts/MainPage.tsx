@@ -1,20 +1,31 @@
 import React, { FunctionComponent } from "react";
 import { Link, Redirect } from "@reach/router";
 import { connect } from "react-redux";
+import clsx from "clsx";
+
+/* redux */
 import { StoreState } from "../reducers";
 import { AuthenticatedInterface } from "../actions/interfaces";
+
+/* components */
 import TopBar from "../components/navigations/TopBar";
+import DrawerLeft from "../components/navigations/DrawerLeft";
+
+import { contentStyles } from "../components/navigations/styles";
 
 interface MainPageProps {
   authenticated: AuthenticatedInterface;
 }
 
 const _MainPage: FunctionComponent<MainPageProps> = (props) => {
+  const classes = contentStyles();
+
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [
     mobileMoreAnchorEl,
     setMobileMoreAnchorEl,
   ] = React.useState<null | HTMLElement>(null);
+  const [openDrawer, setOpenDrawer] = React.useState(false);
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -38,6 +49,14 @@ const _MainPage: FunctionComponent<MainPageProps> = (props) => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
 
+  const handleDrawerOpen = () => {
+    setOpenDrawer(true);
+  };
+
+  const handleDrawerClose = () => {
+    setOpenDrawer(false);
+  };
+
   console.log(props.authenticated);
   if (!props.authenticated.status) return <Redirect to="login" noThrow />;
 
@@ -52,12 +71,22 @@ const _MainPage: FunctionComponent<MainPageProps> = (props) => {
         handleMobileMenuClose={handleMobileMenuClose}
         handleMenuClose={handleMenuClose}
         handleMobileMenuOpen={handleMobileMenuOpen}
+        handleDrawerOpen={handleDrawerOpen}
+        isDrawerOpen={openDrawer}
       />
-      <nav>
-        <Link to="/">Home</Link> <Link to="login">Login</Link>
-      </nav>
-      <main></main>
-      <div>{props.children}</div>
+      <DrawerLeft open={openDrawer} handleDrawerClose={handleDrawerClose} />
+
+      <main
+        className={clsx(classes.content, {
+          [classes.contentShift]: openDrawer,
+        })}
+      >
+        <nav>
+          <Link to="/">Home</Link> <Link to="login">Login</Link>
+        </nav>
+
+        <div>{props.children}</div>
+      </main>
     </div>
   );
 };
