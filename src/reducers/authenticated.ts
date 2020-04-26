@@ -1,11 +1,11 @@
 import {
   AuthenticatedInterface,
-  AuthenticatedAction
+  AuthenticatedAction,
 } from "../actions/interfaces";
 import { ActionTypes } from "../actions/types";
 
 export const AuthenticatedReducer = (
-  state: AuthenticatedInterface = { status: false },
+  state: AuthenticatedInterface = { status: true },
   action: AuthenticatedAction
 ) => {
   switch (action.type) {
