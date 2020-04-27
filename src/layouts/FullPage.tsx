@@ -2,15 +2,17 @@ import React, { FunctionComponent } from "react";
 import { Redirect } from "@reach/router";
 import { connect } from "react-redux";
 import { StoreState } from "../reducers";
-import { AuthenticatedInterface } from "../actions/interfaces";
+import { AuthenticatedInterface, LoginInterface } from "../actions/interfaces";
 
 interface FullPageProps {
   authenticated: AuthenticatedInterface;
+  login: LoginInterface;
 }
 
-const _FullPage: FunctionComponent<FullPageProps> = props => {
+const _FullPage: FunctionComponent<FullPageProps> = (props) => {
   console.log(props.authenticated);
-  if (props.authenticated.status) return <Redirect to="/" noThrow />;
+  if (props.authenticated.status && props.login.token)
+    return <Redirect to="/" noThrow />;
 
   return (
     <div>
@@ -22,12 +24,13 @@ const _FullPage: FunctionComponent<FullPageProps> = props => {
 };
 
 const mapStateToProps = (state: StoreState) => {
-  return { authenticated: state.authenticated };
+  return { authenticated: state.authenticated, login: state.login };
 };
 
 const FullPage = connect<
   {
     authenticated: AuthenticatedInterface;
+    login: LoginInterface;
   },
   {},
   {},

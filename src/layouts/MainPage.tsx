@@ -5,7 +5,7 @@ import clsx from "clsx";
 
 /* redux */
 import { StoreState } from "../reducers";
-import { AuthenticatedInterface } from "../actions/interfaces";
+import { AuthenticatedInterface, LoginInterface } from "../actions/interfaces";
 
 /* components */
 import TopBar from "../components/navigations/TopBar";
@@ -15,6 +15,7 @@ import { contentStyles } from "../components/navigations/styles";
 
 interface MainPageProps {
   authenticated: AuthenticatedInterface;
+  login: LoginInterface;
 }
 
 const _MainPage: FunctionComponent<MainPageProps> = (props) => {
@@ -58,7 +59,8 @@ const _MainPage: FunctionComponent<MainPageProps> = (props) => {
   };
 
   console.log(props.authenticated);
-  if (!props.authenticated.status) return <Redirect to="login" noThrow />;
+  if (!props.authenticated.status && !props.login.token)
+    return <Redirect to="login" noThrow />;
 
   return (
     <div style={{ margin: 0, padding: 0 }}>
@@ -92,12 +94,13 @@ const _MainPage: FunctionComponent<MainPageProps> = (props) => {
 };
 
 const mapStateToProps = (state: StoreState) => {
-  return { authenticated: state.authenticated };
+  return { authenticated: state.authenticated, login: state.login };
 };
 
 const MainPage = connect<
   {
     authenticated: AuthenticatedInterface;
+    login: LoginInterface;
   },
   {},
   {},
