@@ -1,7 +1,11 @@
-import React from "react";
+import React, { FunctionComponent } from "react";
+import { RouteComponentProps } from "@reach/router";
 
-const Profile = () => {
-  return <div>profile</div>;
+interface ProfileProps extends RouteComponentProps {
+  userId?: string;
+}
+const Profile: FunctionComponent<ProfileProps> = (props) => {
+  return <div>profile {props.userId}</div>;
 };
 
 export default Profile;

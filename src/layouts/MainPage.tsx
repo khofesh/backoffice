@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from "react";
-import { Link, Redirect } from "@reach/router";
+import { Redirect } from "@reach/router";
 import { connect } from "react-redux";
 import clsx from "clsx";
 
@@ -83,10 +83,6 @@ const _MainPage: FunctionComponent<MainPageProps> = (props) => {
           [classes.contentShift]: openDrawer,
         })}
       >
-        <nav>
-          <Link to="/">Home</Link> <Link to="login">Login</Link>
-        </nav>
-
         <div>{props.children}</div>
       </main>
     </div>
