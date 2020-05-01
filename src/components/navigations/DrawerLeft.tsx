@@ -11,6 +11,7 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import InboxIcon from "@material-ui/icons/MoveToInbox";
 import MailIcon from "@material-ui/icons/Mail";
+import { Link } from "@reach/router";
 
 import { drawerStyles } from "./styles";
 
@@ -48,16 +49,19 @@ const DrawerLeft: FunctionComponent<DrawerLeftProps> = ({
       </div>
       <Divider />
       <List>
-        {["Dashboard", "Portofolios", "Profile", "Drafts"].map(
-          (text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          )
-        )}
+        {[
+          { text: "Dashboard", route: "/" },
+          { text: "Portofolios", route: "/portofolios" },
+          { text: "Profile", route: "/profile/123" },
+          { text: "Drafts", route: "/klsjdfsd" },
+        ].map((item, index) => (
+          <ListItem button key={item.text} to={item.route} component={Link}>
+            <ListItemIcon>
+              {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+            </ListItemIcon>
+            <ListItemText primary={item.text} />
+          </ListItem>
+        ))}
       </List>
       <Divider />
       <List>

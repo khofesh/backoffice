@@ -37,7 +37,6 @@ const ProfilePage = mainPageLayout(Profile);
 const AllStocksPage = mainPageLayout(AllStocks);
 
 const LoginPage = fullPageLayout(Login);
-const NotFoundPage = fullPageLayout(NotFound);
 
 function App() {
   return (
@@ -49,7 +48,7 @@ function App() {
         <PortoIndex path="/" />
         <Stock path=":stockId" />
       </AllStocksPage>
-      <NotFoundPage default />
+      <NotFound default />
     </Router>
   );
 }
