@@ -1,11 +1,17 @@
 import React, { FunctionComponent } from "react";
 import { Redirect } from "@reach/router";
 import { connect } from "react-redux";
+import { Dispatch, AnyAction } from "redux";
 import clsx from "clsx";
 
 /* redux */
 import { StoreState } from "../reducers";
-import { AuthenticatedInterface, LoginInterface } from "../actions/interfaces";
+import {
+  AuthenticatedInterface,
+  LoginInterface,
+  DrawerInterface,
+} from "../actions/interfaces";
+import { drawerAction } from "../actions/navigations/drawer";
 
 /* components */
 import TopBar from "../components/navigations/TopBar";
@@ -16,6 +22,8 @@ import { contentStyles } from "../components/navigations/styles";
 interface MainPageProps {
   authenticated: AuthenticatedInterface;
   login: LoginInterface;
+  drawer: DrawerInterface;
+  drawerAction(drawer: boolean): any;
 }
 
 const _MainPage: FunctionComponent<MainPageProps> = (props) => {
@@ -26,7 +34,7 @@ const _MainPage: FunctionComponent<MainPageProps> = (props) => {
     mobileMoreAnchorEl,
     setMobileMoreAnchorEl,
   ] = React.useState<null | HTMLElement>(null);
-  const [openDrawer, setOpenDrawer] = React.useState(false);
+  // const [openDrawer, setOpenDrawer] = React.useState(false);
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -51,11 +59,11 @@ const _MainPage: FunctionComponent<MainPageProps> = (props) => {
   };
 
   const handleDrawerOpen = () => {
-    setOpenDrawer(true);
+    props.drawerAction(true);
   };
 
   const handleDrawerClose = () => {
-    setOpenDrawer(false);
+    props.drawerAction(false);
   };
 
   console.log(props.authenticated);
@@ -74,13 +82,16 @@ const _MainPage: FunctionComponent<MainPageProps> = (props) => {
         handleMenuClose={handleMenuClose}
         handleMobileMenuOpen={handleMobileMenuOpen}
         handleDrawerOpen={handleDrawerOpen}
-        isDrawerOpen={openDrawer}
+        isDrawerOpen={props.drawer.isOpen}
       />
-      <DrawerLeft open={openDrawer} handleDrawerClose={handleDrawerClose} />
+      <DrawerLeft
+        open={props.drawer.isOpen}
+        handleDrawerClose={handleDrawerClose}
+      />
 
       <main
         className={clsx(classes.content, {
-          [classes.contentShift]: openDrawer,
+          [classes.contentShift]: props.drawer.isOpen,
         })}
       >
         <div>{props.children}</div>
@@ -90,20 +101,24 @@ const _MainPage: FunctionComponent<MainPageProps> = (props) => {
 };
 
 const mapStateToProps = (state: StoreState) => {
-  return { authenticated: state.authenticated, login: state.login };
+  return {
+    authenticated: state.authenticated,
+    login: state.login,
+    drawer: state.drawer,
+  };
 };
 
 const MainPage = connect<
   {
     authenticated: AuthenticatedInterface;
     login: LoginInterface;
+    drawer: DrawerInterface;
+  },
+  {
+    drawerAction: (drawer: boolean) => (dispatch: Dispatch<AnyAction>) => any;
   },
   {},
-  {},
   StoreState
->(
-  mapStateToProps,
-  {}
-)(_MainPage);
+>(mapStateToProps, { drawerAction })(_MainPage);
 
 export default MainPage;
