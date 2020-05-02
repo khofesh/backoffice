@@ -23,7 +23,7 @@ export interface AuthenticatedAction {
 }
 
 export interface DrawerInterface {
-  drawer: boolean;
+  isOpen: boolean;
 }
 
 export interface DrawerAction {

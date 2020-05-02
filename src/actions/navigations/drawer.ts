@@ -5,7 +5,7 @@ export const drawerAction = (drawer: boolean) => {
   return (dispatch: Dispatch) => {
     dispatch({
       type: ActionTypes.drawer,
-      payload: { openDrawer: drawer },
+      payload: { isOpen: drawer },
     });
   };
 };
