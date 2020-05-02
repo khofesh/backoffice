@@ -21,3 +21,12 @@ export interface AuthenticatedAction {
   type: ActionTypes.authenticated;
   payload: AuthenticatedInterface;
 }
+
+export interface DrawerInterface {
+  drawer: boolean;
+}
+
+export interface DrawerAction {
+  type: ActionTypes.drawer;
+  payload: DrawerInterface;
+}
