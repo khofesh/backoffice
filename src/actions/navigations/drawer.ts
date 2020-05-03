@@ -9,3 +9,12 @@ export const drawerAction = (drawer: boolean) => {
     });
   };
 };
+
+export const tempDrawerAction = (drawer: boolean) => {
+  return (dispatch: Dispatch) => {
+    dispatch({
+      type: ActionTypes.tempdrawer,
+      payload: { isOpen: drawer },
+    });
+  };
+};

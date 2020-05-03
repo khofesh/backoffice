@@ -4,4 +4,5 @@ export enum ActionTypes {
   logout,
   authenticated,
   drawer,
+  tempdrawer,
 }

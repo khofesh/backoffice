@@ -30,3 +30,12 @@ export interface DrawerAction {
   type: ActionTypes.drawer;
   payload: DrawerInterface;
 }
+
+export interface TempDrawerInterface {
+  isOpen: boolean;
+}
+
+export interface TempDrawerAction {
+  type: ActionTypes.tempdrawer;
+  payload: TempDrawerInterface;
+}
