@@ -108,6 +108,18 @@ export const topbarStyles = makeStyles((theme: Theme) =>
         display: "none",
       },
     },
+    menuIconDesktop: {
+      display: "none",
+      [theme.breakpoints.up("md")]: {
+        display: "block",
+      },
+    },
+    menuIconMobile: {
+      display: "block",
+      [theme.breakpoints.up("md")]: {
+        display: "none",
+      },
+    },
   })
 );
 
