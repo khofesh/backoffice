@@ -27,6 +27,7 @@ interface TopBarProps {
   handleMenuClose: () => void;
   handleMobileMenuOpen: (event: React.MouseEvent<HTMLElement>) => void;
   handleDrawerOpen: () => void;
+  handleTempDrawerOpen: () => void;
   isDrawerOpen?: boolean;
 }
 
@@ -41,6 +42,7 @@ const TopBar: FunctionComponent<TopBarProps> = ({
   handleMobileMenuOpen,
   handleDrawerOpen,
   isDrawerOpen,
+  handleTempDrawerOpen,
 }) => {
   const classes = topbarStyles();
 
@@ -110,15 +112,31 @@ const TopBar: FunctionComponent<TopBarProps> = ({
         })}
       >
         <Toolbar className={classes.toolbar}>
-          <IconButton
-            edge="start"
-            className={clsx(classes.menuButton, isDrawerOpen && classes.hide)}
-            color="inherit"
-            aria-label="open drawer"
-            onClick={handleDrawerOpen}
-          >
-            <MenuIcon />
-          </IconButton>
+          {/* desktop */}
+          <div className={classes.menuIconDesktop}>
+            <IconButton
+              edge="start"
+              className={clsx(classes.menuButton, isDrawerOpen && classes.hide)}
+              color="inherit"
+              aria-label="open drawer"
+              onClick={handleDrawerOpen}
+            >
+              <MenuIcon />
+            </IconButton>
+          </div>
+          {/* mobile */}
+          <div className={classes.menuIconMobile}>
+            <IconButton
+              edge="start"
+              className={classes.menuButton}
+              color="inherit"
+              aria-label="open temporary drawer"
+              onClick={handleTempDrawerOpen}
+            >
+              <MenuIcon />
+            </IconButton>
+          </div>
+
           <Typography className={classes.title} variant="h6" noWrap>
             Backoffice
           </Typography>
