@@ -4,28 +4,7 @@ import {
   createStyles,
   fade,
 } from "@material-ui/core/styles";
-
-const drawerWidth = 240;
-
-export const drawerStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    drawer: {
-      width: drawerWidth,
-      flexShrink: 0,
-    },
-    drawerPaper: {
-      width: drawerWidth,
-    },
-    drawerHeader: {
-      display: "flex",
-      alignItems: "center",
-      padding: theme.spacing(0, 1),
-      // necessary for content to be below app bar
-      ...theme.mixins.toolbar,
-      justifyContent: "flex-end",
-    },
-  })
-);
+import { drawerWidth } from "./commonVariables";
 
 export const topbarStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -119,35 +98,6 @@ export const topbarStyles = makeStyles((theme: Theme) =>
       [theme.breakpoints.up("md")]: {
         display: "none",
       },
-    },
-  })
-);
-
-export const contentStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    drawerHeader: {
-      display: "flex",
-      alignItems: "center",
-      padding: theme.spacing(0, 1),
-      // necessary for content to be below app bar
-      ...theme.mixins.toolbar,
-      justifyContent: "flex-end",
-    },
-    content: {
-      flexGrow: 1,
-      padding: theme.spacing(2),
-      transition: theme.transitions.create("margin", {
-        easing: theme.transitions.easing.sharp,
-        duration: theme.transitions.duration.leavingScreen,
-      }),
-      marginLeft: 0,
-    },
-    contentShift: {
-      transition: theme.transitions.create("margin", {
-        easing: theme.transitions.easing.easeOut,
-        duration: theme.transitions.duration.enteringScreen,
-      }),
-      marginLeft: drawerWidth,
     },
   })
 );
