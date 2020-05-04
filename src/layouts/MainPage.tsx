@@ -18,8 +18,10 @@ import { drawerAction, tempDrawerAction } from "../actions/navigations/drawer";
 import TopBar from "../components/navigations/TopBar";
 import DrawerLeft from "../components/navigations/DrawerLeft";
 import TempDrawer from "../components/navigations/TempDrawer";
+import { Footer } from "../components/navigations/Footer";
 
-import { contentStyles } from "../components/navigations/styles";
+/* styles */
+import { contentStyles } from "../assets/styles/content";
 
 interface MainPageProps {
   authenticated: AuthenticatedInterface;
@@ -113,6 +115,8 @@ const _MainPage: FunctionComponent<MainPageProps> = (props) => {
       >
         <div>{props.children}</div>
       </main>
+
+      <Footer drawer={props.drawer} />
     </div>
   );
 };

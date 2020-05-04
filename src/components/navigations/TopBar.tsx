@@ -15,7 +15,7 @@ import NotificationsIcon from "@material-ui/icons/Notifications";
 import MoreIcon from "@material-ui/icons/MoreVert";
 import clsx from "clsx";
 
-import { topbarStyles } from "./styles";
+import { topbarStyles } from "../../assets/styles/topbar";
 
 interface TopBarProps {
   anchorEl: null | HTMLElement;

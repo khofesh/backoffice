@@ -9,7 +9,7 @@ import InboxIcon from "@material-ui/icons/MoveToInbox";
 import MailIcon from "@material-ui/icons/Mail";
 import { Link } from "@reach/router";
 
-import { drawerStyles } from "./styles";
+import { drawerStyles } from "../../assets/styles/drawer";
 
 interface DrawerLeftProps {
   open?: boolean;
