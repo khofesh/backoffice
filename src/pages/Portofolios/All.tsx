@@ -4,9 +4,9 @@ import { Link, RouteComponentProps } from "@reach/router";
 const All: FunctionComponent<RouteComponentProps> = (props) => {
   return (
     <div>
-      <nav>
+      <div style={{ marginBottom: 5 }}>
         <Link to="123">stock 1</Link> <Link to="124">stock 2</Link>
-      </nav>
+      </div>
 
       {props.children}
     </div>
