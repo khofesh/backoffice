@@ -5,7 +5,7 @@ import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
 import { RouteComponentProps } from "@reach/router";
 
-import { DataSheet } from "../../components/tables/DataSheet";
+import { TableGrid } from "../../components/tables/DataGrid";
 import Title from "../../components/Title";
 
 const useStyles = makeStyles((theme) => ({
@@ -42,7 +42,7 @@ const Stock: FunctionComponent<StockProps> = (props) => {
         <Grid item xs={12} md={8} lg={11}>
           <Paper className={classes.paper}>
             <Title>Trade History</Title>
-            <DataSheet />
+            <TableGrid />
           </Paper>
         </Grid>
       </Grid>
