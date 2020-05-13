@@ -15,21 +15,21 @@ const useStyles = makeStyles({
 });
 
 function createData(
-  name: string,
-  calories: number,
-  fat: number,
-  carbs: number,
-  protein: number
+  date: string,
+  shares: number,
+  buyPrice: number,
+  value: number,
+  avePrice: number
 ) {
-  return { name, calories, fat, carbs, protein };
+  return { date, shares, buyPrice, value, avePrice };
 }
 
 const rows = [
-  createData("Frozen yoghurt", 159, 6.0, 24, 4.0),
-  createData("Ice cream sandwich", 237, 9.0, 37, 4.3),
-  createData("Eclair", 262, 16.0, 24, 6.0),
-  createData("Cupcake", 305, 3.7, 67, 4.3),
-  createData("Gingerbread", 356, 16.0, 49, 3.9),
+  createData("May/4/2020", 400, 2630, 1052000, 2630),
+  createData("May/5/2020", 400, 2630, 1052000, 2630),
+  createData("May/6/2020", 400, 2620, 1048000, 2626.66),
+  createData("May/8/2020", 400, 2590, 1036000, 2617.5),
+  createData("May/11/2020", 400, 2620, 1048000, 2618),
 ];
 
 export const TableGrid: React.FC = (props) => {
@@ -40,23 +40,23 @@ export const TableGrid: React.FC = (props) => {
       <Table className={classes.table} size="small" aria-label="a dense table">
         <TableHead>
           <TableRow>
-            <TableCell>Dessert (100g serving)</TableCell>
-            <TableCell align="right">Calories</TableCell>
-            <TableCell align="right">Fat&nbsp;(g)</TableCell>
-            <TableCell align="right">Carbs&nbsp;(g)</TableCell>
-            <TableCell align="right">Protein&nbsp;(g)</TableCell>
+            <TableCell>Date</TableCell>
+            <TableCell align="right">Shares</TableCell>
+            <TableCell align="right">Buying price</TableCell>
+            <TableCell align="right">Value</TableCell>
+            <TableCell align="right">Average Price</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {rows.map((row) => (
-            <TableRow key={row.name}>
+            <TableRow key={row.date}>
               <TableCell component="th" scope="row">
-                {row.name}
+                {row.date}
               </TableCell>
-              <TableCell align="right">{row.calories}</TableCell>
-              <TableCell align="right">{row.fat}</TableCell>
-              <TableCell align="right">{row.carbs}</TableCell>
-              <TableCell align="right">{row.protein}</TableCell>
+              <TableCell align="right">{row.shares}</TableCell>
+              <TableCell align="right">{row.buyPrice}</TableCell>
+              <TableCell align="right">{row.value}</TableCell>
+              <TableCell align="right">{row.avePrice}</TableCell>
             </TableRow>
           ))}
         </TableBody>
