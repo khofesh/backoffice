@@ -1,15 +1,43 @@
 import React, { FunctionComponent } from "react";
-import { Link, RouteComponentProps } from "@reach/router";
+import { RouteComponentProps, Location, Link } from "@reach/router";
+import Breadcrumbs from "@material-ui/core/Breadcrumbs";
+import Typography from "@material-ui/core/Typography";
+import Grid from "@material-ui/core/Grid";
 
 const All: FunctionComponent<RouteComponentProps> = (props) => {
   return (
-    <div>
-      <div style={{ marginBottom: 5 }}>
-        <Link to="123">stock 1</Link> <Link to="124">stock 2</Link>
-      </div>
+    <Grid container spacing={3} justify="center">
+      <Grid item xs={12} md={8} lg={11}>
+        <Location>
+          {({ location }) => {
+            let pathnames = location.pathname.split("/").filter((x) => x);
 
-      {props.children}
-    </div>
+            return (
+              <Breadcrumbs aria-label="breadcrumb">
+                {pathnames.map((value, index) => {
+                  const last = index === pathnames.length - 1;
+                  const to = `/${pathnames.slice(0, index + 1).join("/")}`;
+
+                  return last ? (
+                    <Typography color="textPrimary" key={to}>
+                      {value.toUpperCase()}
+                    </Typography>
+                  ) : (
+                    <Link color="inherit" to={to} key={to}>
+                      {value.toUpperCase()}
+                    </Link>
+                  );
+                })}
+              </Breadcrumbs>
+            );
+          }}
+        </Location>
+      </Grid>
+
+      <Grid item xs={12} md={12} lg={12} xl={12}>
+        {props.children}
+      </Grid>
+    </Grid>
   );
 };
 
