@@ -32,14 +32,14 @@ const Stock: FunctionComponent<StockProps> = (props) => {
   return (
     <>
       <Grid container spacing={3} justify="center">
-        <Grid item xs={12} md={8} lg={11}>
+        <Grid item xs={12} md={8} lg={11} xl={11}>
           <Paper className={fixedHeightPaper}>
             <Title>Stock Info</Title>
             <h2 style={{ margin: 0 }}>stock {props.stockId}</h2>
           </Paper>
         </Grid>
 
-        <Grid item xs={12} md={8} lg={11}>
+        <Grid item xs={12} md={8} lg={11} xl={11}>
           <Paper className={classes.paper}>
             <Title>Trade History</Title>
             <TableGrid />
