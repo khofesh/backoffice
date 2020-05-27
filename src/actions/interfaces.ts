@@ -4,6 +4,18 @@ export interface LoginInterface {
   token: string;
 }
 
+export interface LoginResponse {
+  access_token: string;
+  access_expire: number;
+  refresh_token: string;
+  refresh_expire: number;
+  userData: {
+    id: string;
+    email: string;
+    role: string;
+  };
+}
+
 export interface LoginInitialState {
   token: "";
 }
