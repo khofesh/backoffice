@@ -1,12 +1,12 @@
 import axios from "axios";
 import { Dispatch } from "redux";
 import { ActionTypes } from "../types";
-import { LogoutSuccessResponse } from "../interfaces";
+import { LogoutResponse } from "../interfaces";
 import { navigate } from "@reach/router";
 
 export const logoutAction = () => {
   return async (dispatch: Dispatch) => {
-    const response = await axios.get<LogoutSuccessResponse>(
+    const response = await axios.get<LogoutResponse>(
       "http://localhost:8090/api/v0/admin/logout",
       {
         headers: {

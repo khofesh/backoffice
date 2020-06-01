@@ -51,3 +51,11 @@ export interface TempDrawerAction {
   type: ActionTypes.tempdrawer;
   payload: TempDrawerInterface;
 }
+
+export interface LogoutResponse {
+  code: number;
+  message: string;
+}
+export interface LogoutAction {
+  type: ActionTypes.logout;
+}
