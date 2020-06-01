@@ -4,19 +4,10 @@ import { ActionTypes } from "../types";
 import { LoginResponse } from "../interfaces";
 import { navigate } from "@reach/router";
 
-/**
- *
- * @param email string fahmi@backoffice.com
- * @param password string something88888
- */
-export const loginAction = (email: string, password: string) => {
+export const checkSession = () => {
   return async (dispatch: Dispatch) => {
-    const response = await axios.post<LoginResponse>(
-      "http://localhost:8090/api/v0/admin/login",
-      {
-        email,
-        password,
-      },
+    const response = await axios.get<LoginResponse>(
+      "http://localhost:8090/api/v0/admin/check-session",
       {
         headers: {
           "Access-Control-Allow-Origin": "*",
@@ -29,11 +20,20 @@ export const loginAction = (email: string, password: string) => {
         type: ActionTypes.authenticated,
         payload: { status: true },
       });
-      navigate("/");
+      dispatch({
+        type: ActionTypes.login,
+        payload: response?.data,
+      });
+    } else {
+      dispatch({
+        type: ActionTypes.authenticated,
+        payload: { status: false },
+      });
+      dispatch({
+        type: ActionTypes.login,
+        payload: response?.data,
+      });
+      navigate("/login");
     }
-    dispatch({
-      type: ActionTypes.login,
-      payload: response?.data,
-    });
   };
 };
