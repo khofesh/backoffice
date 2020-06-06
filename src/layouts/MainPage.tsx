@@ -13,6 +13,7 @@ import {
   TempDrawerInterface,
 } from "../actions/interfaces";
 import { drawerAction, tempDrawerAction } from "../actions/navigations/drawer";
+import { logoutAction } from "../actions/auth/logout";
 
 /* components */
 import TopBar from "../components/navigations/TopBar";
@@ -30,6 +31,7 @@ interface MainPageProps {
   drawerAction(drawer: boolean): any;
   tempdrawer: TempDrawerInterface;
   tempDrawerAction(drawer: boolean): any;
+  logoutAction(): any;
 }
 
 const _MainPage: FunctionComponent<MainPageProps> = (props) => {
@@ -80,6 +82,10 @@ const _MainPage: FunctionComponent<MainPageProps> = (props) => {
     props.tempDrawerAction(false);
   };
 
+  const handleLogout = () => {
+    props.logoutAction();
+  };
+
   if (!props.authenticated.status && !props.login.token)
     return <Redirect to="login" noThrow />;
 
@@ -97,6 +103,7 @@ const _MainPage: FunctionComponent<MainPageProps> = (props) => {
         handleDrawerOpen={handleDrawerOpen}
         isDrawerOpen={props.drawer.isOpen}
         handleTempDrawerOpen={handleTempDrawerOpen}
+        handleLogout={handleLogout}
       />
       <DrawerLeft
         open={props.drawer.isOpen}
@@ -141,9 +148,10 @@ const MainPage = connect<
     tempDrawerAction: (
       drawer: boolean
     ) => (dispatch: Dispatch<AnyAction>) => any;
+    logoutAction: () => (dispatch: Dispatch<AnyAction>) => any;
   },
   {},
   StoreState
->(mapStateToProps, { drawerAction, tempDrawerAction })(_MainPage);
+>(mapStateToProps, { drawerAction, tempDrawerAction, logoutAction })(_MainPage);
 
 export default MainPage;

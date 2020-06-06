@@ -29,6 +29,7 @@ interface TopBarProps {
   handleDrawerOpen: () => void;
   handleTempDrawerOpen: () => void;
   isDrawerOpen?: boolean;
+  handleLogout: () => void;
 }
 
 const TopBar: FunctionComponent<TopBarProps> = ({
@@ -43,6 +44,7 @@ const TopBar: FunctionComponent<TopBarProps> = ({
   handleDrawerOpen,
   isDrawerOpen,
   handleTempDrawerOpen,
+  handleLogout,
 }) => {
   const classes = topbarStyles();
 
@@ -59,6 +61,7 @@ const TopBar: FunctionComponent<TopBarProps> = ({
     >
       <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
       <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+      <MenuItem onClick={handleLogout}>Logout</MenuItem>
     </Menu>
   );
 
