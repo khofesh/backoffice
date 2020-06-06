@@ -25,7 +25,6 @@ export const checkSession = () => {
         type: ActionTypes.login,
         payload: response?.data,
       });
-      navigate("/");
     } else {
       dispatch({
         type: ActionTypes.authenticated,

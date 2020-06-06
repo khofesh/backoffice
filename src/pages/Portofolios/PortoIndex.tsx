@@ -6,7 +6,7 @@ const InvoicesIndex: FunctionComponent<RouteComponentProps> = () => (
   <Grid container spacing={3} justify="center">
     <Grid item xs={12} md={8} lg={11} xl={11}>
       <div style={{ marginBottom: 5 }}>
-        <Link to="123">stock 1</Link> <Link to="124">stock 2</Link>
+        <Link to="123">BBRI</Link> <Link to="124">BBCA</Link>
       </div>
       <p>Maybe put some pretty graphs here or something.</p>
     </Grid>

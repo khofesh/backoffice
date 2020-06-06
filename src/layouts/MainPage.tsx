@@ -91,7 +91,7 @@ const _MainPage: FunctionComponent<MainPageProps> = (props) => {
   }, [props.login]);
 
   if (!props.authenticated.status && !props.login.access_token)
-    return <Redirect to="login" noThrow />;
+    return <Redirect to={window.location.pathname} noThrow />;
 
   return (
     <div style={{ margin: 0, padding: 0 }}>
