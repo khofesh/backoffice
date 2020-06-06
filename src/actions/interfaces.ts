@@ -52,10 +52,20 @@ export interface TempDrawerAction {
   payload: TempDrawerInterface;
 }
 
-export interface LogoutResponse {
+export interface LogoutInterface {
   code: number;
-  message: string;
+  msg: string;
 }
 export interface LogoutAction {
   type: ActionTypes.logout;
+  payload: LogoutInterface;
+}
+
+export interface SessionAction {
+  type: ActionTypes.session;
+  payload: LoginInterface;
+}
+
+export interface SessionInterface {
+  token: string;
 }
