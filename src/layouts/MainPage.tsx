@@ -80,7 +80,6 @@ const _MainPage: FunctionComponent<MainPageProps> = (props) => {
     props.tempDrawerAction(false);
   };
 
-  console.log(props.authenticated);
   if (!props.authenticated.status && !props.login.token)
     return <Redirect to="login" noThrow />;
 
