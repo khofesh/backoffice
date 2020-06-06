@@ -12,7 +12,7 @@ import { navigate } from "@reach/router";
 export const loginAction = (email: string, password: string) => {
   return async (dispatch: Dispatch) => {
     const response = await axios.post<LoginResponse>(
-      "http://localhost:8090/api/v0/admin/login",
+      "/api/v0/admin/login",
       {
         email,
         password,
@@ -20,6 +20,7 @@ export const loginAction = (email: string, password: string) => {
       {
         headers: {
           "Access-Control-Allow-Origin": "*",
+          "Content-Type": "application/json",
         },
       }
     );

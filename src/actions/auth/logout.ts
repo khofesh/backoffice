@@ -6,14 +6,12 @@ import { navigate } from "@reach/router";
 
 export const logoutAction = () => {
   return async (dispatch: Dispatch) => {
-    const response = await axios.get<LogoutInterface>(
-      "http://localhost:8090/api/v0/admin/logout",
-      {
-        headers: {
-          "Access-Control-Allow-Origin": "*",
-        },
-      }
-    );
+    const response = await axios.get<LogoutInterface>("/api/v0/admin/logout", {
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Content-Type": "application/json",
+      },
+    });
 
     if (response?.data?.code === 200) {
       dispatch({
