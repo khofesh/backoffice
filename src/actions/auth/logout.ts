@@ -1,12 +1,12 @@
 import axios from "axios";
 import { Dispatch } from "redux";
 import { ActionTypes } from "../types";
-import { LogoutResponse } from "../interfaces";
+import { LogoutInterface } from "../interfaces";
 import { navigate } from "@reach/router";
 
 export const logoutAction = () => {
   return async (dispatch: Dispatch) => {
-    const response = await axios.get<LogoutResponse>(
+    const response = await axios.get<LogoutInterface>(
       "http://localhost:8090/api/v0/admin/logout",
       {
         headers: {
@@ -18,7 +18,7 @@ export const logoutAction = () => {
     if (response?.data?.code === 200) {
       dispatch({
         type: ActionTypes.logout,
-        payload: { logoutSuccess: true },
+        payload: response?.data,
       });
       dispatch({
         type: ActionTypes.login,
