@@ -1,7 +1,7 @@
 import { ActionTypes } from "./types";
 
 export interface LoginInterface {
-  token: string;
+  access_token: string;
 }
 
 export interface LoginResponse {
@@ -67,5 +67,5 @@ export interface SessionAction {
 }
 
 export interface SessionInterface {
-  token: string;
+  access_token: string;
 }

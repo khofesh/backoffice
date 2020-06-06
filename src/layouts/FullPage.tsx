@@ -10,7 +10,7 @@ interface FullPageProps {
 }
 
 const _FullPage: FunctionComponent<FullPageProps> = (props) => {
-  if (props.authenticated.status && props.login.token)
+  if (props.authenticated.status && props.login.access_token)
     return <Redirect to="/" noThrow />;
 
   return (

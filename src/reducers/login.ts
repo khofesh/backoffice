@@ -2,7 +2,7 @@ import { LoginAction, LoginInterface } from "../actions/interfaces";
 import { ActionTypes } from "../actions/types";
 
 export const loginReducer = (
-  state: LoginInterface = { token: "" },
+  state: LoginInterface = { access_token: "" },
   action: LoginAction
 ) => {
   switch (action.type) {

@@ -24,14 +24,6 @@ export const logoutAction = () => {
         type: ActionTypes.login,
         payload: {
           access_token: "",
-          access_expire: "",
-          refresh_token: "",
-          refresh_expire: "",
-          userData: {
-            id: "",
-            email: "",
-            role: "",
-          },
         },
       });
       dispatch({

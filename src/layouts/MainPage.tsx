@@ -86,7 +86,11 @@ const _MainPage: FunctionComponent<MainPageProps> = (props) => {
     props.logoutAction();
   };
 
-  if (!props.authenticated.status && !props.login.token)
+  React.useEffect(() => {
+    console.log("login data", props.login);
+  }, [props.login]);
+
+  if (!props.authenticated.status && !props.login.access_token)
     return <Redirect to="login" noThrow />;
 
   return (
