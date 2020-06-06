@@ -5,4 +5,5 @@ export enum ActionTypes {
   authenticated,
   drawer,
   tempdrawer,
+  session,
 }
