@@ -2,7 +2,6 @@ import axios from "axios";
 import { Dispatch } from "redux";
 import { ActionTypes } from "../types";
 import { LoginResponse } from "../interfaces";
-import { navigate } from "@reach/router";
 
 export const checkSession = () => {
   return async (dispatch: Dispatch) => {
@@ -34,7 +33,6 @@ export const checkSession = () => {
         type: ActionTypes.login,
         payload: response?.data,
       });
-      navigate("/login");
     }
   };
 };
