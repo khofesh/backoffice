@@ -88,10 +88,7 @@ const _MainPage: FunctionComponent<MainPageProps> = (props) => {
 
   React.useEffect(() => {
     console.log("login data", props.login);
-  }, [props.login]);
-
-  if (!props.authenticated.status && !props.login.access_token)
-    return <Redirect to={window.location.pathname} noThrow />;
+  }, [props]);
 
   return (
     <div style={{ margin: 0, padding: 0 }}>
@@ -123,7 +120,13 @@ const _MainPage: FunctionComponent<MainPageProps> = (props) => {
           [classes.contentShift]: props.drawer.isOpen,
         })}
       >
-        <div>{props.children}</div>
+        <div>
+          {!props.authenticated.status && !props.login.access_token ? (
+            <Redirect to="/login" noThrow />
+          ) : (
+            props.children
+          )}
+        </div>
       </main>
 
       <Footer drawer={props.drawer} />
