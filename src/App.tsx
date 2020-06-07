@@ -69,13 +69,18 @@ const _App: FunctionComponent<AppProps> = ({
   return (
     <>
       <Router>
-        <HomePage path="/" />
+        {authenticated.status && login.access_token ? (
+          <>
+            <HomePage path="/" />
+            <ProfilePage path="profile/:userId" />
+            <AllStocksPage path="portofolios">
+              <PortoIndex path="/" />
+              <Stock path=":stockId" />
+            </AllStocksPage>
+          </>
+        ) : null}
+
         <LoginPage path="login" />
-        <ProfilePage path="profile/:userId" />
-        <AllStocksPage path="portofolios">
-          <PortoIndex path="/" />
-          <Stock path=":stockId" />
-        </AllStocksPage>
         <NotFound
           default
           routeName={
