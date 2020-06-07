@@ -1,11 +1,13 @@
-import React, { FunctionComponent, useEffect } from "react";
+import React, { FunctionComponent, useEffect, useCallback } from "react";
 import { Router, RouteComponentProps } from "@reach/router";
 import { connect } from "react-redux";
 import { Dispatch, AnyAction } from "redux";
 
+/* layouts */
 import FullPage from "./layouts/FullPage";
 import MainPage from "./layouts/MainPage";
 
+/* pages */
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import NotFound from "./pages/NotFound";
@@ -14,9 +16,12 @@ import AllStocks from "./pages/Portofolios/All";
 import Stock from "./pages/Portofolios/Stock";
 import PortoIndex from "./pages/Portofolios/PortoIndex";
 
+/* redux */
+import { AuthenticatedInterface, LoginInterface } from "./actions/interfaces";
+import { StoreState } from "./reducers";
 import { checkSession } from "./actions/auth/session";
 
-const fullPageLayout = (
+const publicRoute = (
   Component: React.ComponentType
 ): FunctionComponent<RouteComponentProps> => (props) => {
   return (
@@ -26,7 +31,7 @@ const fullPageLayout = (
   );
 };
 
-const mainPageLayout = (
+const protectedRoute = (
   Component: React.ComponentType
 ): FunctionComponent<RouteComponentProps> => (props) => {
   return (
@@ -36,45 +41,72 @@ const mainPageLayout = (
   );
 };
 
-const HomePage = mainPageLayout(Home);
-const ProfilePage = mainPageLayout(Profile);
-const AllStocksPage = mainPageLayout(AllStocks);
+const HomePage = protectedRoute(Home);
+const ProfilePage = protectedRoute(Profile);
+const AllStocksPage = protectedRoute(AllStocks);
 
-const LoginPage = fullPageLayout(Login);
+const LoginPage = publicRoute(Login);
 
 interface AppProps {
+  authenticated: AuthenticatedInterface;
+  login: LoginInterface;
   checkSession(): any;
 }
 
-const _App: FunctionComponent<AppProps> = ({ checkSession }) => {
-  useEffect(() => {
+const _App: FunctionComponent<AppProps> = ({
+  checkSession,
+  authenticated,
+  login,
+}) => {
+  const session = useCallback(() => {
     checkSession();
-  });
+  }, [checkSession]);
+
+  useEffect(() => {
+    session();
+  }, [session]);
 
   return (
-    <Router>
-      <HomePage path="/" />
-      <LoginPage path="login" />
-      <ProfilePage path="profile/:userId" />
-      <AllStocksPage path="portofolios">
-        <PortoIndex path="/" />
-        <Stock path=":stockId" />
-      </AllStocksPage>
-      <NotFound default />
-    </Router>
+    <>
+      <Router>
+        <HomePage path="/" />
+        <LoginPage path="login" />
+        <ProfilePage path="profile/:userId" />
+        <AllStocksPage path="portofolios">
+          <PortoIndex path="/" />
+          <Stock path=":stockId" />
+        </AllStocksPage>
+        <NotFound
+          default
+          routeName={
+            authenticated.status && login.access_token ? "Home" : "Login"
+          }
+          routePath={
+            authenticated.status && login.access_token ? "/" : "/login"
+          }
+        />
+      </Router>
+    </>
   );
 };
 
-const mapStateToProps = () => {
-  return {};
+const mapStateToProps = (state: StoreState) => {
+  return {
+    authenticated: state.authenticated,
+    login: state.login,
+  };
 };
 
 const App = connect<
-  {},
+  {
+    authenticated: AuthenticatedInterface;
+    login: LoginInterface;
+  },
   {
     checkSession: () => (dispatch: Dispatch<AnyAction>) => any;
   },
-  {}
+  {},
+  StoreState
 >(mapStateToProps, { checkSession })(_App);
 
 export default App;
