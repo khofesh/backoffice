@@ -15,21 +15,21 @@ const useStyles = makeStyles({
 });
 
 function createData(
-  date: string,
+  id: number,
   shares: number,
   buyPrice: number,
   value: number,
   avePrice: number
 ) {
-  return { date, shares, buyPrice, value, avePrice };
+  return { id, shares, buyPrice, value, avePrice };
 }
 
 const rows = [
-  createData("May/4/2020", 400, 2630, 1052000, 2630),
-  createData("May/5/2020", 400, 2630, 1052000, 2630),
-  createData("May/6/2020", 400, 2620, 1048000, 2626.66),
-  createData("May/8/2020", 400, 2590, 1036000, 2617.5),
-  createData("May/11/2020", 400, 2620, 1048000, 2618),
+  createData(1, 400, 2630, 1052000, 2630),
+  createData(2, 400, 2630, 1052000, 2630),
+  createData(3, 400, 2620, 1048000, 2626.66),
+  createData(4, 400, 2590, 1036000, 2617.5),
+  createData(5, 400, 2620, 1048000, 2618),
 ];
 
 export const TableGrid: React.FC = (props) => {
@@ -40,7 +40,6 @@ export const TableGrid: React.FC = (props) => {
       <Table className={classes.table} size="small" aria-label="a dense table">
         <TableHead>
           <TableRow>
-            <TableCell>Date</TableCell>
             <TableCell align="right">Shares</TableCell>
             <TableCell align="right">Buying price</TableCell>
             <TableCell align="right">Value</TableCell>
@@ -49,10 +48,7 @@ export const TableGrid: React.FC = (props) => {
         </TableHead>
         <TableBody>
           {rows.map((row) => (
-            <TableRow key={row.date}>
-              <TableCell component="th" scope="row">
-                {row.date}
-              </TableCell>
+            <TableRow key={row.id}>
               <TableCell align="right">{row.shares}</TableCell>
               <TableCell align="right">{row.buyPrice}</TableCell>
               <TableCell align="right">{row.value}</TableCell>
