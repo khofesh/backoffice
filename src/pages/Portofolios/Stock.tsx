@@ -75,6 +75,9 @@ const Stock: FunctionComponent<StockProps> = (props) => {
   };
 
   const handleOpen = () => {
+    // reset price and lot to 0
+    valuesSet((vals) => ({ ...vals, price: 0, lot: 0 }));
+
     setOpen(true);
   };
 
