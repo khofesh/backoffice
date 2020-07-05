@@ -6,6 +6,10 @@ import { makeStyles } from "@material-ui/core/styles";
 import { RouteComponentProps } from "@reach/router";
 import AddIcon from "@material-ui/icons/Add";
 import IconButton from "@material-ui/core/IconButton";
+import FormControl from "@material-ui/core/FormControl";
+import InputLabel from "@material-ui/core/InputLabel";
+import Input from "@material-ui/core/Input";
+import InputAdornment from "@material-ui/core/InputAdornment";
 
 import { TableGrid } from "../../components/tables/DataGrid";
 import Title from "../../components/Title";
@@ -40,17 +44,35 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
     maxHeight: 600,
   },
+  margin: {
+    marginTop: theme.spacing(1),
+  },
 }));
 
 interface StockProps extends RouteComponentProps {
   stockId?: string;
 }
 
+interface State {
+  price: number;
+  lot: number;
+}
+
 const Stock: FunctionComponent<StockProps> = (props) => {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
+  const [values, valuesSet] = React.useState<State>({
+    price: 0,
+    lot: 0,
+  });
 
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
+
+  const handleChange = (prop: keyof State) => (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    valuesSet({ ...values, [prop]: event.target.value });
+  };
 
   const handleOpen = () => {
     setOpen(true);
@@ -74,7 +96,7 @@ const Stock: FunctionComponent<StockProps> = (props) => {
           <Paper className={classes.paper}>
             <div className={classes.paperTop}>
               <div className={classes.paperTopTitle}>
-                <Title>Trade Scenario</Title>
+                <Title>Average Down Plan</Title>
               </div>
               <label
                 htmlFor="icon-button-file"
@@ -82,7 +104,7 @@ const Stock: FunctionComponent<StockProps> = (props) => {
               >
                 <IconButton
                   color="primary"
-                  aria-label="add scenario"
+                  aria-label="add plan"
                   component="span"
                   onClick={handleOpen}
                 >
@@ -95,12 +117,41 @@ const Stock: FunctionComponent<StockProps> = (props) => {
               classes={{
                 paper: classes.dialog,
               }}
-              id="trade-scenario-dialog"
+              id="trade-plan-dialog"
               keepMounted
               open={open}
               onClose={handleClose}
-              title="Add New Scenario"
-            />
+              title="Add New Plan"
+            >
+              <div>
+                <FormControl fullWidth className={classes.margin}>
+                  <InputLabel htmlFor="standard-adornment-price">
+                    Price
+                  </InputLabel>
+                  <Input
+                    id="standard-adornment-price"
+                    value={values.price}
+                    onChange={handleChange("price")}
+                    startAdornment={
+                      <InputAdornment position="start">$</InputAdornment>
+                    }
+                  />
+                </FormControl>
+                <FormControl fullWidth className={classes.margin}>
+                  <InputLabel htmlFor="standard-adornment-log">Lot</InputLabel>
+                  <Input
+                    id="standard-adornment-log"
+                    value={values.lot}
+                    onChange={handleChange("lot")}
+                    type="number"
+                    startAdornment={
+                      <InputAdornment position="start">Lot</InputAdornment>
+                    }
+                    inputProps={{ min: "0", step: "1" }}
+                  />
+                </FormControl>
+              </div>
+            </TradeScenarioDialog>
 
             <TableGrid />
           </Paper>
