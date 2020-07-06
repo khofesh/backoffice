@@ -14,25 +14,19 @@ const useStyles = makeStyles({
   },
 });
 
-function createData(
-  id: number,
-  shares: number,
-  buyPrice: number,
-  value: number,
-  avePrice: number
-) {
-  return { id, shares, buyPrice, value, avePrice };
+interface RowData {
+  id: number;
+  shares: number;
+  buyPrice: number;
+  value: number;
+  avePrice: number;
 }
 
-const rows = [
-  createData(1, 400, 2630, 1052000, 2630),
-  createData(2, 400, 2630, 1052000, 2630),
-  createData(3, 400, 2620, 1048000, 2626.66),
-  createData(4, 400, 2590, 1036000, 2617.5),
-  createData(5, 400, 2620, 1048000, 2618),
-];
+interface TableGridProps {
+  rows?: RowData[];
+}
 
-export const TableGrid: React.FC = (props) => {
+export const TableGrid: React.FC<TableGridProps> = ({ rows }) => {
   const classes = useStyles();
 
   return (
@@ -47,14 +41,16 @@ export const TableGrid: React.FC = (props) => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
-            <TableRow key={row.id}>
-              <TableCell align="right">{row.shares}</TableCell>
-              <TableCell align="right">{row.buyPrice}</TableCell>
-              <TableCell align="right">{row.value}</TableCell>
-              <TableCell align="right">{row.avePrice}</TableCell>
-            </TableRow>
-          ))}
+          {rows
+            ? rows.map((row) => (
+                <TableRow key={row.id}>
+                  <TableCell align="right">{row.shares}</TableCell>
+                  <TableCell align="right">{row.buyPrice}</TableCell>
+                  <TableCell align="right">{row.value}</TableCell>
+                  <TableCell align="right">{row.avePrice}</TableCell>
+                </TableRow>
+              ))
+            : null}
         </TableBody>
       </Table>
     </TableContainer>
