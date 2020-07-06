@@ -156,7 +156,45 @@ const Stock: FunctionComponent<StockProps> = (props) => {
               </div>
             </TradeScenarioDialog>
 
-            <TableGrid />
+            <TableGrid
+              rows={[
+                {
+                  id: 1,
+                  shares: 400,
+                  buyPrice: 2630,
+                  value: 1052000,
+                  avePrice: 2630,
+                },
+                {
+                  id: 2,
+                  shares: 400,
+                  buyPrice: 2630,
+                  value: 1052000,
+                  avePrice: 2630,
+                },
+                {
+                  id: 3,
+                  shares: 400,
+                  buyPrice: 2620,
+                  value: 1048000,
+                  avePrice: 2626.66,
+                },
+                {
+                  id: 4,
+                  shares: 400,
+                  buyPrice: 2590,
+                  value: 1036000,
+                  avePrice: 2617.5,
+                },
+                {
+                  id: 5,
+                  shares: 400,
+                  buyPrice: 2620,
+                  value: 1048000,
+                  avePrice: 2618,
+                },
+              ]}
+            />
           </Paper>
         </Grid>
       </Grid>
