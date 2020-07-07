@@ -12,19 +12,20 @@ interface TradeScenarioDialogProps {
   open: boolean;
   onClose: () => void;
   title: string;
+  okClicked: () => void;
 }
 
 const TradeScenarioDialog: FunctionComponent<TradeScenarioDialogProps> = (
   props
 ) => {
-  const { onClose, open, title, children, ...other } = props;
+  const { onClose, okClicked, open, title, children, ...other } = props;
 
   const handleCancel = () => {
     onClose();
   };
 
   const handleOk = () => {
-    onClose();
+    okClicked();
   };
 
   return (
