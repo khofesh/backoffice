@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from "react";
+import React, { FunctionComponent, useState, useEffect } from "react";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import clsx from "clsx";
@@ -10,6 +10,7 @@ import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
 import Input from "@material-ui/core/Input";
 import InputAdornment from "@material-ui/core/InputAdornment";
+// import isEmpty from "lodash.isempty";
 
 import { TableGrid } from "../../components/tables/DataGrid";
 import Title from "../../components/Title";
@@ -60,11 +61,12 @@ interface State {
 
 const Stock: FunctionComponent<StockProps> = (props) => {
   const classes = useStyles();
-  const [open, setOpen] = React.useState(false);
-  const [values, valuesSet] = React.useState<State>({
+  const [open, setOpen] = useState(false);
+  const [values, valuesSet] = useState<State>({
     price: 0,
     lot: 0,
   });
+  const [result, setResult] = useState<any[]>([]);
 
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
@@ -84,6 +86,21 @@ const Stock: FunctionComponent<StockProps> = (props) => {
   const handleClose = () => {
     setOpen(false);
   };
+
+  const handleOkClicked = () => {
+    let currentVal = {
+      price: values.price,
+      lot: values.lot,
+      value: values.price * (values.lot * 100),
+    };
+    setResult((v) => [...v, currentVal]);
+
+    console.log("ok");
+  };
+
+  useEffect(() => {
+    console.log(result);
+  }, [result]);
 
   return (
     <>
@@ -124,6 +141,7 @@ const Stock: FunctionComponent<StockProps> = (props) => {
               keepMounted
               open={open}
               onClose={handleClose}
+              okClicked={handleOkClicked}
               title="Add New Plan"
             >
               <div>
